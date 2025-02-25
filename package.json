@@ -1,1 +1,17 @@
-
+{
+  "name": "flight-plan-finder",
+  "version": "1.0.0",
+  "description": "A web app to find flight plans using the Flight Plan Database API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "build": "echo \"No build script required for static site\" && exit 0",
+    "start": "echo \"No start script required for static site\" && exit 0"
+  },
+  "dependencies": {
+    "axios": "^1.6.2"
+  },
+  "keywords": [],
+  "author": "Your Name",
+  "license": "MIT"
+}
