@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Plan Finder</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Flight Plan Finder</h1>
+    <form id="flightForm">
+      <label for="from">Departure Airport (ICAO):</label>
+      <input type="text" id="from" placeholder="e.g., KJFK" required>
+      
+      <label for="to">Arrival Airport (ICAO):</label>
+      <input type="text" id="to" placeholder="e.g., EGLL" required>
+      
+      <button type="submit">Find Flight Plans</button>
+    </form>
+
+    <div id="results"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
