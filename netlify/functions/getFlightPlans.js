@@ -1,6 +1,13 @@
 const axios = require('axios');
 
 exports.handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: 'Method Not Allowed' })
+    };
+  }
+
   const { from, to } = JSON.parse(event.body);
   const API_KEY = process.env.API_KEY;
 
