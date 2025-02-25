@@ -1,17 +1,24 @@
-document.getElementById('flightForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+  const flightForm = document.getElementById('flightForm');
+  if (flightForm) {
+    flightForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-  const from = document.getElementById('from').value;
-  const to = document.getElementById('to').value;
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
 
-  const response = await fetch('/.netlify/functions/getFlightPlans', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from, to })
-  });
+      const response = await fetch('/.netlify/functions/getFlightPlans', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ from, to })
+      });
 
-  const data = await response.json();
-  displayResults(data);
+      const data = await response.json();
+      displayResults(data);
+    });
+  } else {
+    console.error('Form not found');
+  }
 });
 
 function displayResults(plans) {
