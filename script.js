@@ -7,14 +7,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const from = document.getElementById('from').value;
       const to = document.getElementById('to').value;
 
-      const response = await fetch('/.netlify/functions/getFlightPlans', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from, to })
-      });
+      try {
+        const response = await fetch('/.netlify/functions/getFlightPlans', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ from, to })
+        });
 
-      const data = await response.json();
-      displayResults(data);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch flight plans');
+        }
+
+        if (!Array.isArray(data)) {
+          throw new Error('Invalid response format: Expected an array');
+        }
+
+        displayResults(data);
+      } catch (error) {
+        console.error('Error:', error);
+        displayResults([]); // Display an empty result or error message
+      }
     });
   } else {
     console.error('Form not found');
@@ -25,7 +39,7 @@ function displayResults(plans) {
   const resultsDiv = document.getElementById('results');
   resultsDiv.innerHTML = '';
 
-  if (plans.length === 0) {
+  if (!Array.isArray(plans) || plans.length === 0) {
     resultsDiv.innerHTML = '<p>No flight plans found.</p>';
     return;
   }
