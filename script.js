@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayResults(data);
       } catch (error) {
         console.error('Error:', error);
-        displayResults([]); // Display an empty result or error message
+        displayError(error.message); // Display the error message
       }
     });
   } else {
@@ -55,4 +55,9 @@ function displayResults(plans) {
     `;
     resultsDiv.appendChild(planDiv);
   });
+}
+
+function displayError(message) {
+  const resultsDiv = document.getElementById('results');
+  resultsDiv.innerHTML = `<p class="error">${message}</p>`;
 }
